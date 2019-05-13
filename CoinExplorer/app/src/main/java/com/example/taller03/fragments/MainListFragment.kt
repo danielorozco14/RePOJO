@@ -81,7 +81,7 @@ class MainListFragment : Fragment() {
         listenerTool?.searchCoin(coin_name_et.text.toString())
     }
 
-    fun updateMoviesAdapter(coinList: ArrayList<Coin>) {
+    fun updateCoinsAdapter(coinList: ArrayList<Coin>) {
         coinsAdapter.changeDataSet(coinList)
     }
 

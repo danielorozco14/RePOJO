@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
 
     fun addCoinToList(coin: Coin) {
         coinList.add(coin)
-        mainFragment.updateMoviesAdapter(coinList)
+        mainFragment.updateCoinsAdapter(coinList)
         Log.d("Number", coinList.size.toString())
     }
 
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
     private inner class FetchCoin : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String {
             var url: URL? = null
-            url =  NetworkUtils().buildtSearchUrl() //Esta madre te construye el url que se meterá en la poke api
+            url =  NetworkUtils().buildSearchUrl() //Esta madre te construye el url que se meterá en la poke api
             try {
                 return NetworkUtils().getResponseFromHttpUrl(url)//el json como una string
             } catch (e: IOException) {
