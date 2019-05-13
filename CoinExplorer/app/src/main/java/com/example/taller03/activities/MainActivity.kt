@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.taller03.AppConstants
 import com.example.taller03.R
+import com.example.taller03.adapters.CoinAdapter
 import com.example.taller03.data.Database
 import com.example.taller03.fragments.MainContentFragment
 import com.example.taller03.fragments.MainListFragment
@@ -22,6 +23,7 @@ import java.net.URL
 
 class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener {
     private lateinit var mainFragment: MainListFragment
+    private lateinit var adapter: CoinAdapter
     private lateinit var mainContentFragment: MainContentFragment
 
     private var coinList = ArrayList<Coin>()
@@ -65,6 +67,12 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
         Log.d("Number", coinList.size.toString())
     }
 
+    fun addCoinToDatabase(coin: Coin) {
+        if (dbHelper.insertCoin(coin)) {
+            mainFragment.updateCoinsAdapter(dbHelper.readCoins())
+        }
+    }
+
     override fun searchCoin(coinName: String) {
         FetchCoin().execute()
     }
@@ -87,7 +95,8 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
     private inner class FetchCoin : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String {
             var url: URL? = null
-            url =  NetworkUtils().buildSearchUrl() //Esta madre te construye el url que se meterá en la poke api
+            url =
+                NetworkUtils().buildSearchUrl() //Esta madre te construye el url que se meterá en la poke api
             try {
                 return NetworkUtils().getResponseFromHttpUrl(url)//el json como una string
             } catch (e: IOException) {
@@ -106,7 +115,7 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
                 for (num in 0 until coinJson.length()) {
 
                     val coin = Gson().fromJson<Coin>(coinJson.getString(num), Coin::class.java)
-                    addCoinToList(coin)
+                    addCoinToDatabase(coin)
                 }
 
             } else {
