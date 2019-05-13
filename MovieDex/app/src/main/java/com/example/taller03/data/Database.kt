@@ -25,7 +25,8 @@ private const val SQL_CREATE_ENTRIES =
 private const val SQL_DELETE_ENTRIES =
     "DROP TABLE IF EXISTS ${DatabaseContract.CoinEntry.TABLE_NAME}"
 
-class Database(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class Database(context: Context) :
+    SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_ENTRIES)
@@ -111,7 +112,7 @@ class Database(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                     getFloat(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_VALUEUS)),
                     getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_YEAR)),
                     getString(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_REVIEW)),
-//                    (getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_ISAVAILABLE))),
+                    (getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_ISAVAILABLE)) == 1),
                     getString(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_IMG))
                 )
                 lista.add(persona)

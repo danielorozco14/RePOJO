@@ -20,7 +20,7 @@ import org.json.JSONArray
 import java.io.IOException
 import java.net.URL
 
-class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListener {
+class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener {
     private lateinit var mainFragment: MainListFragment
     private lateinit var mainContentFragment: MainContentFragment
 
@@ -87,9 +87,9 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
     private inner class FetchCoin : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String {
             var url: URL? = null
-            url =  NetworkUtils().buildtSearchUrl() //Esta madre te construye el url que se metera en la poke api
+            url =  NetworkUtils().buildtSearchUrl() //Esta madre te construye el url que se meterá en la poke api
             try {
-                return NetworkUtils().getResponseFromHttpUrl(url!!)//el json como una string
+                return NetworkUtils().getResponseFromHttpUrl(url)//el json como una string
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -105,20 +105,11 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
                 var coinJson = JSONArray(coinInfo)
                 for (num in 0 until coinJson.length()) {
 
-                    Log.d("PRUEBA0", coinJson.getString(num)) // sí se ejecuta
-
                     val coin = Gson().fromJson<Coin>(coinJson.getString(num), Coin::class.java)
-                    Log.d("PRUEBA1", coinJson.getString(num))
                     addCoinToList(coin)
                 }
-//                if (!false/**coinJson.getString("Response") == "True"*/) {
-//                    val coin = Gson().fromJson<Coin>(coinInfo, Coin::class.java)
-//                    addCoinToList(coin)
-//                } else {
-//                    Toast.makeText(this@MainActivity, "No existe en la base de datos,", Toast.LENGTH_LONG).show()
-//                }
+
             } else {
-                Log.d("PRUEBA-1","ENTRÓ")
                 Toast.makeText(this@MainActivity, "Ha ocurrido un error,", Toast.LENGTH_LONG).show()
             }
         }
