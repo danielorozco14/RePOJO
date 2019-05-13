@@ -32,7 +32,7 @@ data class Coin(
         parcel.writeString(_id)
         parcel.writeString(name)
         parcel.writeString(country)
-        parcel.writeFloat(value_us)
+        parcel.writeFloat(value)
         parcel.writeFloat(value_us)
         parcel.writeInt(year)
         parcel.writeString(review)
