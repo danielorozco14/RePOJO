@@ -18,14 +18,14 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/movie_name_et"
+            android:id="@+id/coin_name_et"
             android:layout_width="0dp"
-            android:hint="@string/movie_name_string"
+            android:hint="@string/coin_name_string"
             android:layout_height="wrap_content"
             android:layout_weight="3" />
 
         <Button
-            android:id="@+id/add_movie_btn"
+            android:id="@+id/add_coin_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,7 +35,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/movie_list_rv"
+        android:id="@+id/coin_list_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8" />

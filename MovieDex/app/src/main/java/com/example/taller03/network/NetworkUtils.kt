@@ -1,7 +1,6 @@
-package com.deushdezt.laboratorio4.network
+package com.example.taller03.network
 
 import android.net.Uri
-import android.util.Log
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
@@ -10,25 +9,23 @@ import java.util.*
 
 class NetworkUtils {
 
-    val MOVIES_API_BASEURL = "http://pdm-taller2.herokuapp.com/coins"
+    val COINS_API_BASEURL = "http://pdm-taller2.herokuapp.com/coins"
     val TOKEN_API = "coins"
 
-    fun buildtSearchUrl(movieName: String) : URL {
-        val builtUri = Uri.parse(MOVIES_API_BASEURL)
-                .buildUpon()
-
-
-                .build()
+    fun buildtSearchUrl(coinName: String): URL {
+        val builtUri = Uri.parse(COINS_API_BASEURL)
+            .buildUpon()
+            .build()
 
         return try {
             URL(builtUri.toString())
-        }catch (e : MalformedURLException){
+        } catch (e: MalformedURLException) {
             URL("")
         }
     }
 
     @Throws(IOException::class)
-    fun getResponseFromHttpUrl(url: URL):String{
+    fun getResponseFromHttpUrl(url: URL): String {
         val urlConnection = url.openConnection() as HttpURLConnection
         try {
             val `in` = urlConnection.inputStream
@@ -37,12 +34,12 @@ class NetworkUtils {
             scanner.useDelimiter("\\A")
 
             val hasInput = scanner.hasNext()
-            return if(hasInput){
+            return if (hasInput) {
                 scanner.next()
-            }else{
+            } else {
                 ""
             }
-        }finally {
+        } finally {
             urlConnection.disconnect()
         }
     }

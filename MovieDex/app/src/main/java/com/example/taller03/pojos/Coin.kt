@@ -1,9 +1,9 @@
-package com.deushdezt.laboratorio4.pojos
+package com.example.taller03.pojos
 
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Movie(
+data class Coin(
     val name: String = "N/A",
     val country: String = "N/A",
     val value: Int = 0,
@@ -46,9 +46,9 @@ data class Movie(
 
     companion object {
         @JvmField
-        val CREATOR = object : Parcelable.Creator<Movie> {
-            override fun createFromParcel(parcel: Parcel): Movie = Movie(parcel)
-            override fun newArray(size: Int): Array<Movie?> = arrayOfNulls(size)
+        val CREATOR = object : Parcelable.Creator<Coin> {
+            override fun createFromParcel(parcel: Parcel): Coin = Coin(parcel)
+            override fun newArray(size: Int): Array<Coin?> = arrayOfNulls(size)
         }
     }
 

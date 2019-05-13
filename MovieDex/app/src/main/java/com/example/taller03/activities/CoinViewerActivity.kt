@@ -1,17 +1,17 @@
-package com.deushdezt.laboratorio4.activities
+package com.example.taller03.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.bumptech.glide.Glide
-import com.deushdezt.laboratorio4.R
-import com.deushdezt.laboratorio4.pojos.Movie
-import kotlinx.android.synthetic.main.viewer_movie.*
+import com.example.taller03.R
+import com.example.taller03.pojos.Coin
+import kotlinx.android.synthetic.main.viewer_coin.*
 
-class MovieViewerActivity: AppCompatActivity() {
+class CoinViewerActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.viewer_movie)
+        setContentView(R.layout.viewer_coin)
 
         setSupportActionBar(toolbarviewer)
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -19,17 +19,17 @@ class MovieViewerActivity: AppCompatActivity() {
         collapsingtoolbarviewer.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
         collapsingtoolbarviewer.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar)
 
-        val reciever: Movie = intent?.extras?.getParcelable("MOVIE") ?: Movie()
-        init(reciever)
+        val receiver: Coin = intent?.extras?.getParcelable("COIN") ?: Coin()
+        init(receiver)
     }
 
-    fun init(movie: Movie){
+    fun init(coin: Coin){
         Glide.with(this)
-                .load(movie.img)
+                .load(coin.img)
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(app_bar_image_viewer)
-        collapsingtoolbarviewer.title = movie.name
-        app_bar_rating_viewer.text = movie.country
+        collapsingtoolbarviewer.title = coin.name
+        app_bar_rating_viewer.text = coin.country
 
     }
 

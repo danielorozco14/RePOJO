@@ -1,4 +1,4 @@
-package com.deushdezt.laboratorio4
+package com.example.taller03
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
