@@ -18,6 +18,7 @@ import com.example.taller03.data.models.Coin
 import com.google.gson.Gson
 import org.json.JSONArray
 import java.io.IOException
+import java.net.URL
 
 class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListener {
     private lateinit var mainFragment: MainListFragment
@@ -34,6 +35,7 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
             ?: ArrayList<Coin>()
 
         initMainFragment()
+        FetchCoin().execute()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -64,7 +66,7 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
     }
 
     override fun searchCoin(coinName: String) {
-        FetchCoin().execute(coinName)
+        FetchCoin().execute()
     }
 
     override fun managePortraitItemClick(coin: Coin) {
@@ -82,21 +84,20 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
         changeFragment(R.id.land_main_cont_fragment, mainContentFragment)
     }
 
-    private inner class FetchCoin : AsyncTask<String, Void, String>() {
-
-        override fun doInBackground(vararg params: String): String {
-
-            if (params.isNullOrEmpty()) return ""
-
-            val coinName = params[0]
-            val coinUrl = NetworkUtils().buildtSearchUrl(coinName)
-
-            return try {
-                NetworkUtils().getResponseFromHttpUrl(coinUrl)
+    private inner class FetchCoin : AsyncTask<Void, Void, String>() {
+        override fun doInBackground(vararg params: Void?): String {
+            var url: URL? = null
+            url =  NetworkUtils().buildtSearchUrl() //Esta madre te construye el url que se metera en la poke api
+            try {
+                return NetworkUtils().getResponseFromHttpUrl(url!!)//el json como una string
             } catch (e: IOException) {
-                ""
+                e.printStackTrace()
             }
+
+            return ""// un null XD
+
         }
+
 
         override fun onPostExecute(coinInfo: String) {
             super.onPostExecute(coinInfo)

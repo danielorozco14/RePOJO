@@ -12,7 +12,7 @@ class NetworkUtils {
     val COINS_API_BASEURL = "http://pdm-taller2.herokuapp.com/coins"
     val TOKEN_API = "coins"
 
-    fun buildtSearchUrl(coinName: String): URL {
+    fun buildtSearchUrl(): URL {
         val builtUri = Uri.parse(COINS_API_BASEURL)
             .buildUpon()
             .build()
