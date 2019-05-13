@@ -11,7 +11,7 @@ data class Coin(
     val value_us: Int = 0,
     val year: Int = 9999,
     val review: String = "N/A",
-    val isAvailable: Int = 0,
+  //  val isAvailable: Boolean = false,
     val img: String = "N/A",
     val _v: Int = 0
 ) : Parcelable {
@@ -23,7 +23,7 @@ data class Coin(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readString(),
-        parcel.readInt(),
+      //  parcel.readInt(),
         parcel.readString(),
         parcel.readInt()
     )
@@ -36,7 +36,7 @@ data class Coin(
         parcel.writeInt(value_us)
         parcel.writeInt(year)
         parcel.writeString(review)
-        parcel.writeInt(isAvailable)
+       // parcel.writeInt(isAvailable)
         parcel.writeString(img)
         parcel.writeInt(_v)
 

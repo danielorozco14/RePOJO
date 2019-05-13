@@ -20,7 +20,7 @@ import org.json.JSONArray
 import java.io.IOException
 
 class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListener {
-    private lateinit var mainFragment : MainListFragment
+    private lateinit var mainFragment: MainListFragment
     private lateinit var mainContentFragment: MainContentFragment
 
     private var coinList = ArrayList<Coin>()
@@ -30,7 +30,8 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        coinList = savedInstanceState?.getParcelableArrayList(AppConstants.dataset_saveinstance_key) ?: ArrayList<Coin>()
+        coinList = savedInstanceState?.getParcelableArrayList(AppConstants.dataset_saveinstance_key)
+            ?: ArrayList<Coin>()
 
         initMainFragment()
     }
@@ -40,28 +41,29 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
         super.onSaveInstanceState(outState)
     }
 
-    fun initMainFragment(){
+    fun initMainFragment() {
         mainFragment = MainListFragment.newInstance(coinList)
 
-        val resource = if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
-            R.id.main_fragment
-        else {
-            mainContentFragment = MainContentFragment.newInstance(Coin())
-            changeFragment(R.id.land_main_cont_fragment, mainContentFragment)
+        val resource =
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+                R.id.main_fragment
+            else {
+                mainContentFragment = MainContentFragment.newInstance(Coin())
+                changeFragment(R.id.land_main_cont_fragment, mainContentFragment)
 
-            R.id.land_main_fragment
-        }
+                R.id.land_main_fragment
+            }
 
         changeFragment(resource, mainFragment)
     }
 
-    fun addMovieToList(coin: Coin) {
+    fun addCoinToList(coin: Coin) {
         coinList.add(coin)
         mainFragment.updateMoviesAdapter(coinList)
         Log.d("Number", coinList.size.toString())
     }
 
-    override fun searchMovie(coinName: String) {
+    override fun searchCoin(coinName: String) {
         FetchCoin().execute(coinName)
     }
 
@@ -71,7 +73,9 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
         startActivity(Intent(this, CoinViewerActivity::class.java).putExtras(coinBundle))
     }
 
-    private fun changeFragment(id: Int, frag: Fragment){ supportFragmentManager.beginTransaction().replace(id, frag).commit() }
+    private fun changeFragment(id: Int, frag: Fragment) {
+        supportFragmentManager.beginTransaction().replace(id, frag).commit()
+    }
 
     override fun manageLandscapeItemClick(coin: Coin) {
         mainContentFragment = MainContentFragment.newInstance(coin)
@@ -97,21 +101,23 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
         override fun onPostExecute(coinInfo: String) {
             super.onPostExecute(coinInfo)
             if (!coinInfo.isEmpty()) {
-                val coinJson = JSONArray(coinInfo)
-                for(num in 0..coinJson.length()){
+                var coinJson = JSONArray()
+                for (num in 0 until coinJson.length()) {
 
-                    val coin = Gson().fromJson<Coin>(coinInfo, Coin::class.java)
-                    addMovieToList(coin)
+                    Log.d("PRUEBA0", coinJson.getString(num)) // sí se ejecuta
+
+                    val coin = Gson().fromJson<Coin>(coinJson.getString(num), Coin::class.java)
+                    Log.d("PRUEBA1", coinJson.getString(num))
+                    addCoinToList(coin)
                 }
-                if (!false/**coinJson.getString("Response") == "True"*/) {
-                    val coin = Gson().fromJson<Coin>(coinInfo, Coin::class.java)
-                    addMovieToList(coin)
-                } else {
-                    Toast.makeText(this@MainActivity, "No existe en la base de datos,", Toast.LENGTH_LONG).show()
-                }
-            }else
-            {
-                Toast.makeText(this@MainActivity, "A ocurrido un error,", Toast.LENGTH_LONG).show()
+//                if (!false/**coinJson.getString("Response") == "True"*/) {
+//                    val coin = Gson().fromJson<Coin>(coinInfo, Coin::class.java)
+//                    addCoinToList(coin)
+//                } else {
+//                    Toast.makeText(this@MainActivity, "No existe en la base de datos,", Toast.LENGTH_LONG).show()
+//                }
+            } else {
+                Toast.makeText(this@MainActivity, "Ha ocurrido un error,", Toast.LENGTH_LONG).show()
             }
         }
     }

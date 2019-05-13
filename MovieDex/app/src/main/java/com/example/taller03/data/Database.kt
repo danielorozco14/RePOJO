@@ -111,7 +111,7 @@ class Database(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                     getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_VALUEUS)),
                     getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_YEAR)),
                     getString(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_REVIEW)),
-                    (getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_ISAVAILABLE))),
+//                    (getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_ISAVAILABLE))),
                     getString(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_IMG))
                 )
                 lista.add(persona)

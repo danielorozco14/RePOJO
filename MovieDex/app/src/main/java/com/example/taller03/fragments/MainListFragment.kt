@@ -17,33 +17,38 @@ import com.example.taller03.data.models.Coin
 import kotlinx.android.synthetic.main.coins_list_fragment.*
 import kotlinx.android.synthetic.main.coins_list_fragment.view.*
 
-class MainListFragment: Fragment(){
+class MainListFragment : Fragment() {
 
-    private lateinit var  coins :ArrayList<Coin>
-    private lateinit var coinsAdapter : MyCoinAdapter
-    var listenerTool :  SearchNewCoinListener? = null
+    private lateinit var coins: ArrayList<Coin>
+    private lateinit var coinsAdapter: MyCoinAdapter
+    var listenerTool: SearchNewCoinListener? = null
 
     companion object {
-        fun newInstance(dataset : ArrayList<Coin>): MainListFragment{
+        fun newInstance(dataset: ArrayList<Coin>): MainListFragment {
             val newFragment = MainListFragment()
             newFragment.coins = dataset
             return newFragment
         }
     }
 
-    interface SearchNewCoinListener{
-        fun searchMovie(coinName: String)
+    interface SearchNewCoinListener {
+        fun searchCoin(coinName: String)
 
         fun managePortraitItemClick(coin: Coin)
 
         fun manageLandscapeItemClick(coin: Coin)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.coins_list_fragment, container, false)
 
-        if(savedInstanceState != null) coins = savedInstanceState.getParcelableArrayList<Coin>(AppConstants.MAIN_LIST_KEY)!!
+        if (savedInstanceState != null) coins =
+            savedInstanceState.getParcelableArrayList<Coin>(AppConstants.MAIN_LIST_KEY)!!
 
         initRecyclerView(resources.configuration.orientation, view)
         initSearchButton(view)
@@ -51,15 +56,18 @@ class MainListFragment: Fragment(){
         return view
     }
 
-    fun initRecyclerView(orientation:Int, container:View){
+    fun initRecyclerView(orientation: Int, container: View) {
         val linearLayoutManager = LinearLayoutManager(this.context)
 
-        if(orientation == Configuration.ORIENTATION_PORTRAIT){
-            coinsAdapter = CoinAdapter(coins, { coin: Coin ->listenerTool?.managePortraitItemClick(coin)})
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            coinsAdapter =
+                CoinAdapter(coins, { coin: Coin -> listenerTool?.managePortraitItemClick(coin) })
             container.coin_list_rv.adapter = coinsAdapter as CoinAdapter
         }
-        if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            coinsAdapter = CoinSimpleListAdapter(coins, { coin: Coin ->listenerTool?.manageLandscapeItemClick(coin)})
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            coinsAdapter = CoinSimpleListAdapter(
+                coins,
+                { coin: Coin -> listenerTool?.manageLandscapeItemClick(coin) })
             container.coin_list_rv.adapter = coinsAdapter as CoinSimpleListAdapter
         }
 
@@ -69,11 +77,13 @@ class MainListFragment: Fragment(){
         }
     }
 
-    fun initSearchButton(container:View) = container.add_coin_btn.setOnClickListener {
-        listenerTool?.searchMovie(coin_name_et.text.toString())
+    fun initSearchButton(container: View) = container.add_coin_btn.setOnClickListener {
+        listenerTool?.searchCoin(coin_name_et.text.toString())
     }
 
-    fun updateMoviesAdapter(coinList: ArrayList<Coin>){ coinsAdapter.changeDataSet(coinList) }
+    fun updateMoviesAdapter(coinList: ArrayList<Coin>) {
+        coinsAdapter.changeDataSet(coinList)
+    }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
