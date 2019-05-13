@@ -33,11 +33,14 @@ class MainContentFragment: Fragment() {
 
     fun bindData(view: View){
         view.coin_title_main_content_fragment.text = coin.name
-        view.coin_rate_main_content_fragment.text = coin.country
-
+        view.plot_main_content_fragment.text = coin.review
+view.released_main_content_fragment.text=coin.year.toString()
+view.pais_main_content_fragment.text=coin.country
+        view.runtime_main_content_fragment.text=coin.value_us.toString()
         Glide.with(view).load(coin.img)
             .placeholder(R.drawable.ic_launcher_background)
             .into(view.image_main_content_fragment)
     }
+
 
 }
