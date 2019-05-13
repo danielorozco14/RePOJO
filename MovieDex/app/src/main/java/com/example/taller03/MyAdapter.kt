@@ -1,6 +1,6 @@
 package com.example.taller03
 
-import com.example.taller03.pojos.Coin
+import com.example.taller03.data.models.Coin
 
 object AppConstants{
     val dataset_saveinstance_key = "CLE"

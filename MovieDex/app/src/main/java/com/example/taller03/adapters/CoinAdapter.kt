@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.taller03.MyCoinAdapter
 import com.example.taller03.R
-import com.example.taller03.pojos.Coin
+import com.example.taller03.data.models.Coin
 import kotlinx.android.synthetic.main.cardview_coin.view.*
 
 class CoinAdapter(var coins: List<Coin>, val clickListener: (Coin) -> Unit): RecyclerView.Adapter<CoinAdapter.ViewHolder>(), MyCoinAdapter {

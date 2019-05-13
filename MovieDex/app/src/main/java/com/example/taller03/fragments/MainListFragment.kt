@@ -13,7 +13,7 @@ import com.example.taller03.MyCoinAdapter
 import com.example.taller03.R
 import com.example.taller03.adapters.CoinAdapter
 import com.example.taller03.adapters.CoinSimpleListAdapter
-import com.example.taller03.pojos.Coin
+import com.example.taller03.data.models.Coin
 import kotlinx.android.synthetic.main.coins_list_fragment.*
 import kotlinx.android.synthetic.main.coins_list_fragment.view.*
 
@@ -55,11 +55,11 @@ class MainListFragment: Fragment(){
         val linearLayoutManager = LinearLayoutManager(this.context)
 
         if(orientation == Configuration.ORIENTATION_PORTRAIT){
-            coinsAdapter = CoinAdapter(coins, { coin:Coin->listenerTool?.managePortraitItemClick(coin)})
+            coinsAdapter = CoinAdapter(coins, { coin: Coin ->listenerTool?.managePortraitItemClick(coin)})
             container.coin_list_rv.adapter = coinsAdapter as CoinAdapter
         }
         if(orientation == Configuration.ORIENTATION_LANDSCAPE){
-            coinsAdapter = CoinSimpleListAdapter(coins, { coin:Coin->listenerTool?.manageLandscapeItemClick(coin)})
+            coinsAdapter = CoinSimpleListAdapter(coins, { coin: Coin ->listenerTool?.manageLandscapeItemClick(coin)})
             container.coin_list_rv.adapter = coinsAdapter as CoinSimpleListAdapter
         }
 

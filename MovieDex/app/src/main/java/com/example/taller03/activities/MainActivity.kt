@@ -10,24 +10,27 @@ import android.util.Log
 import android.widget.Toast
 import com.example.taller03.AppConstants
 import com.example.taller03.R
+import com.example.taller03.data.Database
 import com.example.taller03.fragments.MainContentFragment
 import com.example.taller03.fragments.MainListFragment
 import com.example.taller03.network.NetworkUtils
-import com.example.taller03.pojos.Coin
+import com.example.taller03.data.models.Coin
 import com.google.gson.Gson
 import org.json.JSONArray
 import java.io.IOException
 
-class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener {
+class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListener {
     private lateinit var mainFragment : MainListFragment
     private lateinit var mainContentFragment: MainContentFragment
 
     private var coinList = ArrayList<Coin>()
 
+    var dbHelper = Database(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        coinList = savedInstanceState?.getParcelableArrayList(AppConstants.dataset_saveinstance_key) ?: ArrayList()
+        coinList = savedInstanceState?.getParcelableArrayList(AppConstants.dataset_saveinstance_key) ?: ArrayList<Coin>()
 
         initMainFragment()
     }

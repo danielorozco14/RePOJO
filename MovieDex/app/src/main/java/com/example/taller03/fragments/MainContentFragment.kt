@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.taller03.R
-import com.example.taller03.pojos.Coin
+import com.example.taller03.data.models.Coin
 import kotlinx.android.synthetic.main.main_content_fragment_layout.view.*
 
 class MainContentFragment: Fragment() {

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.example.taller03.R
-import com.example.taller03.pojos.Coin
+import com.example.taller03.data.models.Coin
 import kotlinx.android.synthetic.main.viewer_coin.*
 
 class CoinViewerActivity: AppCompatActivity() {
