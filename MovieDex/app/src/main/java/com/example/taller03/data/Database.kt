@@ -104,11 +104,11 @@ class Database(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         with(cursor) {
             while (moveToNext()) {
                 var persona = Coin(
-                    getInt(getColumnIndexOrThrow(BaseColumns._ID)),
+                    getString(getColumnIndexOrThrow(BaseColumns._ID)),
                     getString(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_NAME)),
                     getString(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_COUNTRY)),
-                    getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_VALUE)),
-                    getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_VALUEUS)),
+                    getFloat(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_VALUE)),
+                    getFloat(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_VALUEUS)),
                     getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_YEAR)),
                     getString(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_REVIEW)),
 //                    (getInt(getColumnIndexOrThrow(DatabaseContract.CoinEntry.COLUMN_ISAVAILABLE))),

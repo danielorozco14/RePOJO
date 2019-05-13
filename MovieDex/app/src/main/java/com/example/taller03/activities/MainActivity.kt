@@ -101,7 +101,7 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
         override fun onPostExecute(coinInfo: String) {
             super.onPostExecute(coinInfo)
             if (!coinInfo.isEmpty()) {
-                var coinJson = JSONArray()
+                var coinJson = JSONArray(coinInfo)
                 for (num in 0 until coinJson.length()) {
 
                     Log.d("PRUEBA0", coinJson.getString(num)) // sí se ejecuta
@@ -117,6 +117,7 @@ class MainActivity() : AppCompatActivity(), MainListFragment.SearchNewCoinListen
 //                    Toast.makeText(this@MainActivity, "No existe en la base de datos,", Toast.LENGTH_LONG).show()
 //                }
             } else {
+                Log.d("PRUEBA-1","ENTRÓ")
                 Toast.makeText(this@MainActivity, "Ha ocurrido un error,", Toast.LENGTH_LONG).show()
             }
         }

@@ -4,11 +4,11 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Coin(
-    val _id: Int = 0,
+    val _id: String = "N/A",
     val name: String = "N/A",
     val country: String = "N/A",
-    val value: Int = 0,
-    val value_us: Int = 0,
+    val value: Float = 0.toFloat(),
+    val value_us: Float = 0.toFloat(),
     val year: Int = 9999,
     val review: String = "N/A",
   //  val isAvailable: Boolean = false,
@@ -16,11 +16,11 @@ data class Coin(
     val _v: Int = 0
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readInt(),
-        parcel.readInt(),
+        parcel.readString(),
+        parcel.readFloat(),
+        parcel.readFloat(),
         parcel.readInt(),
         parcel.readString(),
       //  parcel.readInt(),
@@ -29,11 +29,11 @@ data class Coin(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(_id)
+        parcel.writeString(_id)
         parcel.writeString(name)
         parcel.writeString(country)
-        parcel.writeInt(value)
-        parcel.writeInt(value_us)
+        parcel.writeFloat(value_us)
+        parcel.writeFloat(value_us)
         parcel.writeInt(year)
         parcel.writeString(review)
        // parcel.writeInt(isAvailable)
