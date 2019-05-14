@@ -12,10 +12,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.Menu
-import com.example.taller03.data.DatabaseContract
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import com.example.taller03.AppConstants
 import com.example.taller03.R
@@ -33,9 +30,6 @@ import java.net.URL
 
 class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener,
     NavigationView.OnNavigationItemSelectedListener {
-
-
-
 
     private lateinit var mainFragment: MainListFragment
     private lateinit var mainContentFragment: MainContentFragment
