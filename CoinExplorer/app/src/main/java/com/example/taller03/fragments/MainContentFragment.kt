@@ -2,7 +2,9 @@ package com.example.taller03.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.DrawerLayout
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
@@ -40,6 +42,10 @@ view.pais_main_content_fragment.text=coin.country
         Glide.with(view).load(coin.img)
             .placeholder(R.drawable.ic_launcher_background)
             .into(view.image_main_content_fragment)
+    }
+
+    fun filterData(view:View){
+
     }
 
 

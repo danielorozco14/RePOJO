@@ -9,21 +9,30 @@
 
         <!-- TODO (3.5) Los mienbros del menu necesitan ID, TITLE-->
         <item
-                android:id="@+id/nav_camera"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="Import"/>
+                android:id="@+id/country_ElSalvador"
+                android:icon="@drawable/ic_launcher_background"
+                android:title="El Salvador"/>
         <item
-                android:id="@+id/nav_gallery"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="Gallery"/>
+            android:id="@+id/country_Guatemala"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Panama"/>
         <item
-                android:id="@+id/nav_slideshow"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Slideshow"/>
+            android:id="@+id/country_Honduras"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Guatemala"/>
         <item
-                android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Tools"/>
+            android:id="@+id/country_CostaRica"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Costa Rica"/>
+        <item
+            android:id="@+id/country_Panama"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Nicaragua"/>
+        <item
+            android:id="@+id/country_Belize"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Belize"/>
+
     </group>
 
     <!-- TODO (3.6) Se puede definir  seccion con Communicate -->

@@ -2,11 +2,20 @@ package com.example.taller03.activities
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.database.sqlite.SQLiteDatabase
 import android.os.AsyncTask
 import android.os.Bundle
+import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
+import com.example.taller03.data.DatabaseContract
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.example.taller03.AppConstants
 import com.example.taller03.R
@@ -16,13 +25,21 @@ import com.example.taller03.fragments.MainListFragment
 import com.example.taller03.network.NetworkUtils
 import com.example.taller03.data.models.Coin
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.viewer_coin.*
 import org.json.JSONArray
 import java.io.IOException
 import java.net.URL
 
-class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener {
+class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener,
+    NavigationView.OnNavigationItemSelectedListener {
+
+
+
+
     private lateinit var mainFragment: MainListFragment
     private lateinit var mainContentFragment: MainContentFragment
+
 
     private var coinList = ArrayList<Coin>()
 
@@ -34,8 +51,49 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
         coinList = savedInstanceState?.getParcelableArrayList(AppConstants.dataset_saveinstance_key)
             ?: ArrayList<Coin>()
 
+        val toggle=ActionBarDrawerToggle(
+            this,drawer_layout,toolbarviewer,R.string.navigation_drawer_open,R.string.navigation_drawer_close
+        )
+
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+        nav_view.setNavigationItemSelectedListener (this)
+
         initMainFragment()
         FetchCoin().execute()
+
+    }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+
+            R.id.country_ElSalvador -> {
+
+
+            }
+            R.id.country_Panama -> {
+
+            }
+            R.id.country_CostaRica -> {
+
+            }
+            R.id.country_Honduras -> {
+
+            }
+            R.id.country_Belize -> {
+
+            }
+            R.id.country_Guatemala -> {
+
+            }
+        }
+
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -58,6 +116,7 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
 
         changeFragment(resource, mainFragment)
     }
+
 
     fun addCoinToList(coin: Coin) {
         coinList.add(coin)
@@ -87,7 +146,8 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
     private inner class FetchCoin : AsyncTask<Void, Void, String>() {
         override fun doInBackground(vararg params: Void?): String {
             var url: URL? = null
-            url =  NetworkUtils().buildSearchUrl() //Esta madre te construye el url que se meterá en la poke api
+            url =
+                NetworkUtils().buildSearchUrl() //Esta madre te construye el url que se meterá en la poke api
             try {
                 return NetworkUtils().getResponseFromHttpUrl(url)//el json como una string
             } catch (e: IOException) {
@@ -110,7 +170,7 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
                 }
 
             } else {
-                Toast.makeText(this@MainActivity, "Ha ocurrido un error,", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, "Ha ocurrido un error", Toast.LENGTH_LONG).show()
             }
         }
     }
