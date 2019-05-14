@@ -16,6 +16,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.taller03.AppConstants
 import com.example.taller03.R
+import com.example.taller03.adapters.CoinAdapter
 import com.example.taller03.data.Database
 import com.example.taller03.fragments.MainContentFragment
 import com.example.taller03.fragments.MainListFragment
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
     NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var mainFragment: MainListFragment
+    private lateinit var adapter: CoinAdapter
     private lateinit var mainContentFragment: MainContentFragment
 
 
@@ -118,6 +120,12 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
         Log.d("Number", coinList.size.toString())
     }
 
+    fun addCoinToDatabase(coin: Coin) {
+        if (dbHelper.insertCoin(coin)) {
+            mainFragment.updateCoinsAdapter(dbHelper.readCoins())
+        }
+    }
+
     override fun searchCoin(coinName: String) {
         FetchCoin().execute()
     }
@@ -160,7 +168,7 @@ class MainActivity : AppCompatActivity(), MainListFragment.SearchNewCoinListener
                 for (num in 0 until coinJson.length()) {
 
                     val coin = Gson().fromJson<Coin>(coinJson.getString(num), Coin::class.java)
-                    addCoinToList(coin)
+                    addCoinToDatabase(coin)
                 }
 
             } else {
